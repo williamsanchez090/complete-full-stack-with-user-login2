@@ -30,6 +30,8 @@ Array.from(pigLatin).forEach(function (element) {
 Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
         const name = this.parentNode.parentNode.childNodes[1].innerText
+        const word = this.parentNode.parentNode.childNodes[3].innerText
+        let pigLatined = sortAlphabets(word)
         const msg = this.parentNode.parentNode.childNodes[3].innerText
         fetch('messages', {
           method: 'delete',
@@ -38,7 +40,9 @@ Array.from(trash).forEach(function(element) {
           },
           body: JSON.stringify({
             'name': name,
-            'msg': msg
+            'msg': msg,
+            'ogWord': word,
+            'newWord': pigLatined,
           })
         }).then(function (response) {
           window.location.reload()
